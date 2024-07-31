@@ -15,12 +15,10 @@ canilla(triangular, roja, 4).
 
 % Punto 1
 
-costoCanieria([], 0).
-costoCanieria([Pieza | Resto], PrecioTotal):-
-    costoPieza(Pieza, PrecioPieza),
-    costoCanieria(Resto, PrecioResto),
-    PrecioTotal is PrecioPieza + PrecioResto.
-
+costoCanieria(Canieria, PrecioTotal):-
+    findall(Precio,(member(Pieza, Canieria), costoPieza(Pieza, Precio)), Precios),
+    sumlist(Precios, PrecioTotal).
+    
 costoPieza(codo(_), 5).
 
 costoPieza(canio(_, Metros), Precio):-
@@ -35,4 +33,21 @@ precioSegunAncho(Ancho, Num, 15):-
     Ancho > Num.
 precioSegunAncho(Ancho, Num, 12):-
     Ancho =< Num.
+
+%% Punto 2
+colorPieza(codo(Color), Color).
+colorPieza(canio(Color, _), Color).
+colorPieza(canilla(_, Color, _), Color).
+
+coloresEnchufables(azul, rojo).
+coloresEnchufables(rojo, negro).
+
+puedoEnchufar(P1, P2):-
+    colorPieza(P1, Color1),
+    colorPieza(P2, Color2),
+    Color1 = Color2.
+puedoEnchufar(P1, P2):-
+    colorPieza(P1, Color1), colorPieza(P2, Color2),
+    coloresEnchufables(Color1, Color2).
+
 
