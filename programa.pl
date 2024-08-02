@@ -42,6 +42,7 @@ colorPieza(canilla(_, Color, _), Color).
 coloresEnchufables(azul, rojo).
 coloresEnchufables(rojo, negro).
 
+/*
 puedoEnchufar(P1, P2):-
     colorPieza(P1, Color1),
     colorPieza(P2, Color2),
@@ -49,5 +50,19 @@ puedoEnchufar(P1, P2):-
 puedoEnchufar(P1, P2):-
     colorPieza(P1, Color1), colorPieza(P2, Color2),
     coloresEnchufables(Color1, Color2).
+*/
+
+%% Punto 3
+puedoEnchufar([P1|Resto], [P2|Resto2]):-
+    reverse([P1 | Resto], [Ultimo | Reves]),
+    colorPieza(Ultimo, Color1),
+    colorPieza(P2, Color2),
+    Color1 = Color2.
+puedoEnchufar([P1|Resto], [P2|Resto2]):-
+    reverse([P1 | Resto], [Ultimo | Reves]),
+    colorPieza(Ultimo, Color1),
+    colorPieza(P2, Color2),
+    coloresEnchufables(Color1, Color2).
+
 
 
