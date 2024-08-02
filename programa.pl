@@ -64,5 +64,13 @@ puedoEnchufar([P1|Resto], [P2|Resto2]):-
     colorPieza(P2, Color2),
     coloresEnchufables(Color1, Color2).
 
+%% Punto 4
+canieriaBienArmada([P1 | Resto]):-
+    puedoEnchufar([P1], Resto),
+    canieriaBienArmada(Resto).
+
+canieriaBienArmada([Resto | []]).
+
+
 
 
